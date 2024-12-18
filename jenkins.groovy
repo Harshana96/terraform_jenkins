@@ -21,11 +21,18 @@ pipeline {
                     ls -la
                         
                     # Make the Terraform binary executable
-                    chmod +x terraform
-                        
+                    chmod +x terraform  
+                '''
+            }
+        }
+
+        stage('check terrafrom version') {
+            steps {
+                 sh '''
+                    cd terraform 
+                    pwd  
                     # Verify Terraform installation
                     terraform version
-                    
                 '''
             }
         }
