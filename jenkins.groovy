@@ -17,6 +17,8 @@ pipeline {
                     pwd    
                     # Download Terraform binary
                     aws s3 cp s3://hash2buket/terraform . --recursive
+
+                    ls -la
                         
                     # Make the Terraform binary executable
                     chmod +x terraform
