@@ -28,7 +28,7 @@ pipeline {
                     dir(TERRAFORM_DIR) {
                     sh '''
                     terraform init
-                    terraform plan -out=tfplan
+                    terraform plan
                     '''
                 }
             }
