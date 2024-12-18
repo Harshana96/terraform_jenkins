@@ -2,9 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello World') {
+        stage('List Files') {
             steps {
-                echo 'Hello, World!'
+                script {
+                    // For Unix-based systems (Linux, macOS)
+                    if (isUnix()) {
+                        sh 'ls -al'
+                    } 
+                    // For Windows systems
+                    else {
+                        bat 'dir'
+                    }
+                }
             }
         }
     }
