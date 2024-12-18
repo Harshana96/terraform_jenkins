@@ -29,54 +29,25 @@ pipeline {
         stage('check terrafrom version') {
             steps {
                  sh '''
-                    pwd  
-                    ls -la
                     # Verify Terraform installation
                     terraform version
                 '''
             }
         }
 
-        // stage('Install Terraform') {
-        //     steps {
-        //         script {
-        //             echo "Installing Terraform"
-        //             sh '''
-                        // # Create a directory for Terraform binary
-                        // mkdir -p ${TERRAFORM_DIR}
-                        
-                        // # Download Terraform binary
-                        // aws s3 cp s3://hash2buket/terraform/ {TERRAFORM_DIR}
-                        
-                        // # Make the Terraform binary executable
-                        // chmod +x ${TERRAFORM_DIR}/terraform
-                        
-                        // # Verify Terraform installation
-                        // ${TERRAFORM_DIR}/terraform version
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Setup') {
+            steps {
+                echo "Preparing Terraform Execution"
+                    sh 'terraform init'
+            }
+        }
 
-    //     stage('Setup') {
-    //         steps {
-    //             echo "Preparing Terraform Execution"
-    //             // Initialize Terraform
-    //             dir(TERRAFORM_DIR) {
-    //                 sh 'terraform init'
-    //             }
-    //         }
-    //     }
-
-    //     stage('Plan') {
-    //         steps {
-    //             echo "Planning Infrastructure Changes"
-    //             // Run Terraform plan
-    //             dir(TERRAFORM_DIR) {
-    //                 sh 'terraform plan -out=tfplan'
-    //             }
-    //         }
-    //     }
+        stage('Plan') {
+            steps {
+                echo "Planning Infrastructure Changes"
+                    sh 'terraform plan -out=tfplan'
+            }
+        }
 
     }
 
