@@ -26,7 +26,7 @@ pipeline {
                         aws s3 cp s3://hash2buket/terraform_1.10.2_linux_amd64.zip .
                         
                         # Unzip the binary
-                        unzip -o ${TERRAFORM_DIR}/terraform.zip -d ${TERRAFORM_DIR}
+                        unzip -o ${TERRAFORM_DIR}/*.zip -d ${TERRAFORM_DIR}
                         
                         # Make the Terraform binary executable
                         chmod +x ${TERRAFORM_DIR}/terraform
