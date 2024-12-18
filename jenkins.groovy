@@ -18,19 +18,15 @@ pipeline {
            steps {
                  sh '''
                     cd terraform
-                    pwd
-
-                    # Create a directory for Terraform binary
-                        mkdir -p ${TERRAFORM_DIR}
+                    pwd    
+                    # Download Terraform binary
+                    aws s3 cp s3://hash2buket/terraform/ .
                         
-                        # Download Terraform binary
-                        aws s3 cp s3://hash2buket/terraform/ {TERRAFORM_DIR}
+                    # Make the Terraform binary executable
+                    chmod +x ${TERRAFORM_DIR}/terraform
                         
-                        # Make the Terraform binary executable
-                        chmod +x ${TERRAFORM_DIR}/terraform
-                        
-                        # Verify Terraform installation
-                        ${TERRAFORM_DIR}/terraform version
+                    # Verify Terraform installation
+                    ${TERRAFORM_DIR}/terraform version
                     
                 '''
             }
