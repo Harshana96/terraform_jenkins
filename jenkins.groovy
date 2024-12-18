@@ -31,6 +31,7 @@ pipeline {
                  sh '''
                     cd terraform 
                     pwd  
+                    ls -la
                     # Verify Terraform installation
                     terraform version
                 '''
