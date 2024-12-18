@@ -23,7 +23,7 @@ pipeline {
                         mkdir -p ${TERRAFORM_DIR}
                         
                         # Download Terraform binary
-                        aws s3 cp s3://hash2buket/terraform_1.10.2_linux_amd64.zip .
+                        aws s3 cp s3://hash2buket/terraform_1.10.2_linux_amd64.zip {TERRAFORM_DIR}
                         
                         # Unzip the binary
                         unzip -o ${TERRAFORM_DIR}/*.zip -d ${TERRAFORM_DIR}
