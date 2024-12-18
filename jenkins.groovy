@@ -10,26 +10,25 @@ pipeline {
             }
         }
 
-        stage('change directory') {
-           steps {
-                 sh '''
-                    cd terraform
-                    pwd    
-                    # Download Terraform binary
-                    aws s3 cp s3://hash2buket/terraform . 
+        // stage('change directory') {
+        //    steps {
+        //          sh '''
+        //             cd terraform
+        //             pwd    
+        //             # Download Terraform binary
+        //             aws s3 cp s3://hash2buket/terraform . 
 
-                    ls -la
+        //             ls -la
                         
-                    # Make the Terraform binary executable
-                    chmod +x terraform  
-                '''
-            }
-        }
+        //             # Make the Terraform binary executable
+        //             chmod +x terraform  
+        //         '''
+        //     }
+        // }
 
         stage('check terrafrom version') {
             steps {
                  sh '''
-                    cd terraform 
                     pwd  
                     ls -la
                     # Verify Terraform installation
