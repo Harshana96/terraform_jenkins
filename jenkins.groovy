@@ -15,10 +15,12 @@ pipeline {
         }
 
         stage('change directory') {
-            sh '''
-                cd terraform
-                pwd
-            '''
+           steps {
+                 sh '''
+                    cd terraform
+                    pwd
+                '''
+            }
         }
 
         // stage('Install Terraform') {
