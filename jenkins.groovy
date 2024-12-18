@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        TERRAFORM_DIR = "./terraform" // Directory where Terraform will be downloaded and executed
+    }
+
     stages {
         stage('List Files') {
             steps {
@@ -9,22 +13,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('change directory') {
-        //    steps {
-        //          sh '''
-        //             cd terraform
-        //             pwd    
-        //             # Download Terraform binary
-        //             aws s3 cp s3://hash2buket/terraform . 
-
-        //             ls -la
-                        
-        //             # Make the Terraform binary executable
-        //             chmod +x terraform  
-        //         '''
-        //     }
-        // }
 
         stage('check terrafrom version') {
             steps {
@@ -35,17 +23,12 @@ pipeline {
             }
         }
 
-        stage('Setup') {
-            steps {
-                echo "Preparing Terraform Execution"
-                    sh 'terraform init'
-            }
-        }
-
-        stage('Plan') {
-            steps {
-                echo "Planning Infrastructure Changes"
-                    sh 'terraform plan -out=tfplan'
+        stage('Initiate and execute terraform') {
+            dir(TERRAFORM_DIR) {
+                sh '''
+                ./terraform init
+                ./terraform plan -out=tfplan
+                '''
             }
         }
 
