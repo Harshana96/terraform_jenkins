@@ -14,6 +14,13 @@ pipeline {
             }
         }
 
+        stage('change directory') {
+            sh '''
+                cd terraform
+                pwd
+            '''
+        }
+
         // stage('Install Terraform') {
         //     steps {
         //         script {
