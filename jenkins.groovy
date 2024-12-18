@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        TERRAFORM_DIR = "./terraform" // Path to the Terraform files in the workspace
-    }
-
     stages {
         stage('List Files') {
             steps {
@@ -23,10 +19,10 @@ pipeline {
                     aws s3 cp s3://hash2buket/terraform/ . --recursive
                         
                     # Make the Terraform binary executable
-                    chmod +x ${TERRAFORM_DIR}/terraform
+                    chmod +x terraform
                         
                     # Verify Terraform installation
-                    ${TERRAFORM_DIR}/terraform version
+                    terraform version
                     
                 '''
             }
