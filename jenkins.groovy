@@ -24,11 +24,13 @@ pipeline {
         }
 
         stage('Initiate and execute terraform') {
-            dir(TERRAFORM_DIR) {
-                sh '''
-                ./terraform init
-                ./terraform plan -out=tfplan
-                '''
+                steps {
+                    dir(TERRAFORM_DIR) {
+                    sh '''
+                    ./terraform init
+                    ./terraform plan -out=tfplan
+                    '''
+                }
             }
         }
 
