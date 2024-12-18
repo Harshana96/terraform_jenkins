@@ -19,6 +19,19 @@ pipeline {
                  sh '''
                     cd terraform
                     pwd
+
+                    # Create a directory for Terraform binary
+                        mkdir -p ${TERRAFORM_DIR}
+                        
+                        # Download Terraform binary
+                        aws s3 cp s3://hash2buket/terraform/ {TERRAFORM_DIR}
+                        
+                        # Make the Terraform binary executable
+                        chmod +x ${TERRAFORM_DIR}/terraform
+                        
+                        # Verify Terraform installation
+                        ${TERRAFORM_DIR}/terraform version
+                    
                 '''
             }
         }
@@ -28,17 +41,17 @@ pipeline {
         //         script {
         //             echo "Installing Terraform"
         //             sh '''
-        //                 # Create a directory for Terraform binary
-        //                 mkdir -p ${TERRAFORM_DIR}
+                        // # Create a directory for Terraform binary
+                        // mkdir -p ${TERRAFORM_DIR}
                         
-        //                 # Download Terraform binary
-        //                 aws s3 cp s3://hash2buket/terraform/ {TERRAFORM_DIR}
+                        // # Download Terraform binary
+                        // aws s3 cp s3://hash2buket/terraform/ {TERRAFORM_DIR}
                         
-        //                 # Make the Terraform binary executable
-        //                 chmod +x ${TERRAFORM_DIR}/terraform
+                        // # Make the Terraform binary executable
+                        // chmod +x ${TERRAFORM_DIR}/terraform
                         
-        //                 # Verify Terraform installation
-        //                 ${TERRAFORM_DIR}/terraform version
+                        // # Verify Terraform installation
+                        // ${TERRAFORM_DIR}/terraform version
         //             '''
         //         }
         //     }
