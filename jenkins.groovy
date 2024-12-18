@@ -23,7 +23,7 @@ pipeline {
                         mkdir -p ${TERRAFORM_DIR}
                         
                         # Download Terraform binary
-                        aws s3 cp s3://hash2buket/terraform_1.10.2_linux_amd64/ {TERRAFORM_DIR}
+                        aws s3 cp s3://hash2buket/terraform/ {TERRAFORM_DIR}
                         
                         # Make the Terraform binary executable
                         chmod +x ${TERRAFORM_DIR}/terraform
